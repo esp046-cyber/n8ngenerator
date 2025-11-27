@@ -29,6 +29,78 @@
             margin: 0 auto;
         }
 
+        .tutorial {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .tutorial h2 {
+            color: #667eea;
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+        }
+
+        .tutorial-step {
+            background: #f8f9fa;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .tutorial-step h3 {
+            color: #333;
+            font-size: 1rem;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .step-number {
+            background: #667eea;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .tutorial-step p {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .toggle-tutorial {
+            background: #764ba2;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 12px;
+        }
+
+        .toggle-tutorial:active {
+            opacity: 0.8;
+        }
+
+        .tutorial.hidden {
+            display: none;
+        }
+
         .header {
             text-align: center;
             color: white;
@@ -251,6 +323,50 @@
         <div class="header">
             <h1>⚡ n8n Workflow Generator</h1>
             <p>Create automated workflows visually</p>
+        </div>
+
+        <button class="toggle-tutorial" onclick="toggleTutorial()">📚 Show/Hide Tutorial</button>
+
+        <div class="tutorial" id="tutorial">
+            <h2>🎓 Beginner's Tutorial</h2>
+            
+            <div class="tutorial-step">
+                <h3><span class="step-number">1</span> What is n8n?</h3>
+                <p>n8n is a workflow automation tool that connects different apps and services together. This generator helps you create n8n workflow configurations easily!</p>
+            </div>
+
+            <div class="tutorial-step">
+                <h3><span class="step-number">2</span> Choose Node Type</h3>
+                <p><strong>Trigger:</strong> Starts your workflow (e.g., when you receive an email)<br>
+                <strong>Action:</strong> Does something (e.g., send a Slack message)<br>
+                <strong>Condition:</strong> Makes decisions (e.g., if value > 100)<br>
+                <strong>Transform:</strong> Changes data (e.g., convert format)</p>
+            </div>
+
+            <div class="tutorial-step">
+                <h3><span class="step-number">3</span> Select Node Name & Service</h3>
+                <p>Pick from the dropdown what you want to do. For example, choose "HTTP Request" for the name and "HTTP" for the service to make API calls.</p>
+            </div>
+
+            <div class="tutorial-step">
+                <h3><span class="step-number">4</span> Use Parameter Templates</h3>
+                <p>Select a template from the dropdown to auto-fill common configurations. You can edit the JSON directly or just use the template as-is!</p>
+            </div>
+
+            <div class="tutorial-step">
+                <h3><span class="step-number">5</span> Add Nodes to Workflow</h3>
+                <p>Click "Add Node to Workflow" button. Repeat steps 2-4 to add more nodes. They'll automatically connect in sequence!</p>
+            </div>
+
+            <div class="tutorial-step">
+                <h3><span class="step-number">6</span> Generate & Export</h3>
+                <p>Fill in your workflow name and description, then click "Generate n8n JSON". Copy the output and import it into your n8n instance!</p>
+            </div>
+
+            <div class="tutorial-step">
+                <h3><span class="step-number">7</span> Example Workflow</h3>
+                <p><strong>Try this:</strong> Add a "Webhook" trigger → Add an "HTTP Request" action → Add a "Slack" action. This creates a workflow that receives data via webhook, calls an API, and posts to Slack!</p>
+            </div>
         </div>
 
         <div class="main-content">
@@ -682,6 +798,11 @@
             }).catch(err => {
                 alert('Failed to copy to clipboard');
             });
+        }
+
+        function toggleTutorial() {
+            const tutorial = document.getElementById('tutorial');
+            tutorial.classList.toggle('hidden');
         }
 
         renderNodes();
